@@ -1,15 +1,26 @@
 <?php
 header('Content-Type: application/json');
-require("pdo.php");
+require "pdo.php";
 //$conexion = $conn();
 
 switch ($_GET['accion']) {
+    // case 'listar':
+    //     $sql = "SELECT codigo,descripcion,precio FROM articulos";
+    //     $stmt = $pdo -> prepare($sql);
+    //     $stmt -> execute();
+    //     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    //     echo json_encode($result);
+    //     break;
+
+
     case 'listar':
         $sql = "SELECT codigo,descripcion,precio FROM articulos";
         $stmt = $pdo -> prepare($sql);
-        $stmt -> execute;
-        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
+        $stmt -> execute();
+        
+        $result = $stmt -> fetchAll(PDO::FETCH_FUNC, fn($codigo, $descripcion, $precio) => [$codigo, $descripcion, $precio]);
+        
+        echo json_encode(['data' => $result]);
         break;
 
 /*     case 'agregar':

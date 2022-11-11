@@ -111,9 +111,6 @@
             "defaultContent": "<button class='btn btn-sm btn-primary botonborrar'>Borra?</button>",
             data: null
           }],
-          "language": {
-            "url": "DataTables/spanish.json",
-          },
         });
 
         //Eventos de botones de la aplicación
@@ -165,8 +162,6 @@
           };
           return registro;
         }
-
-
         // funciones para comunicarse con el servidor via ajax
         function agregarRegistro(registro) {
           $.ajax({
@@ -177,7 +172,7 @@
               tabla1.ajax.reload();
             },
             error: function() {
-              alert("Hay un problema");
+              alert("Hay un problema agregando");
             }
           });
         }
@@ -191,7 +186,7 @@
               tabla1.ajax.reload();
             },
             error: function() {
-              alert("Hay un problema");
+              alert("Hay un problema borrando");
             }
           });
         }
@@ -208,7 +203,7 @@
               $("#FormularioArticulo").modal('show');
             },
             error: function() {
-              alert("Hay un problema");
+              alert("Hay un problema recuperando");
             }
           });
         }
@@ -222,7 +217,7 @@
               tabla1.ajax.reload();
             },
             error: function() {
-              alert("Hay un problema");
+              alert("Hay un problema modificando");
             }
           });
         }
