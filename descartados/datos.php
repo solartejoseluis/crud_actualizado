@@ -12,7 +12,6 @@ switch ($_GET['accion']) {
     //     echo json_encode($result);
     //     break;
 
-
     case 'listar':
         $sql = "SELECT codigo,descripcion,precio FROM articulos";
         $stmt = $pdo -> prepare($sql);
@@ -20,7 +19,7 @@ switch ($_GET['accion']) {
         
         $result = $stmt -> fetchAll(PDO::FETCH_FUNC, fn($codigo, $descripcion, $precio) => [$codigo, $descripcion, $precio]);
         
-        echo json_encode(["data" => $result]);
+        echo json_encode(['data' => $result]);
         break;
 
 /*     case 'agregar':

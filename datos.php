@@ -20,7 +20,7 @@ switch ($_GET['accion']) {
         
         $result = $stmt -> fetchAll(PDO::FETCH_FUNC, fn($codigo, $descripcion, $precio) => [$codigo, $descripcion, $precio]);
         
-        echo json_encode(['data' => $result]);
+        echo json_encode(["data" => $result]);
         break;
 
 /*     case 'agregar':
