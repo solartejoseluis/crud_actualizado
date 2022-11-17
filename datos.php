@@ -12,7 +12,8 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-
+        
+    // la siguiente seccion no envia los nombres de campos y por eso falla.    
     // case 'listar':
     //     $sql = "SELECT codigo,descripcion,precio FROM articulos";
     //     $stmt = $pdo -> prepare($sql);
