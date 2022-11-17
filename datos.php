@@ -4,24 +4,24 @@ require "pdo.php";
 //$conexion = $conn();
 
 switch ($_GET['accion']) {
-    // case 'listar':
-    //     $sql = "SELECT codigo,descripcion,precio FROM articulos";
-    //     $stmt = $pdo -> prepare($sql);
-    //     $stmt -> execute();
-    //     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
-    //     echo json_encode($result);
-    //     break;
-
-
     case 'listar':
         $sql = "SELECT codigo,descripcion,precio FROM articulos";
         $stmt = $pdo -> prepare($sql);
         $stmt -> execute();
-        
-        $result = $stmt -> fetchAll(PDO::FETCH_FUNC, fn($codigo, $descripcion, $precio) => [$codigo, $descripcion, $precio]);
-        
-        echo json_encode(["data" => $result]);
+        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
         break;
+
+
+    // case 'listar':
+    //     $sql = "SELECT codigo,descripcion,precio FROM articulos";
+    //     $stmt = $pdo -> prepare($sql);
+    //     $stmt -> execute();
+        
+    //     $result = $stmt -> fetchAll(PDO::FETCH_FUNC, fn($codigo, $descripcion, $precio) => [$codigo, $descripcion, $precio]);
+        
+    //     echo json_encode(["data" => $result]);
+    //     break;
 
 /*     case 'agregar':
         $sql = ($conexion, "INSERT INTO articulos(descripcion,precio) VALUES ('$_POST[descripcion]',$_POST[precio])");

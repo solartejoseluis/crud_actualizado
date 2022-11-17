@@ -22,7 +22,7 @@
   </head>
   <body>
 
-    <h1>Datatables prueba 2022-11-16_mie</h1>
+    <h1>Datatables prueba </h1>
 
   <div class="container">
 
@@ -30,9 +30,8 @@
       <div class="col-12">
 
         <table class="table" id="tablaarticulos">
-        
-            <thead>
-            <tr>
+          <thead>
+            <tr>  
               <td>Código</td>
               <td>Descripción</td>
               <td>Precio</td>
@@ -84,9 +83,9 @@
 
     </div>
 <!-- fin formulario -->
-    
+
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
+      document.addEventListener("DOMContentLoaded",function() {
         let tabla1 = $("#tablaarticulos").DataTable({
           "ajax": {
             url: "datos.php?accion=listar",
@@ -100,10 +99,9 @@
           "columnDefs": [
             {targets: 3,"defaultContent": "<button type='button' class='btn btn-primary' botonmodificar> Modificar</button>",data: null}, 
             {targets: 4,"defaultContent": "<button type='button' class='btn btn-primary' botonborrar>Borrar</button>",data: null}],
-        });
-
-
-        //Eventos de botones de la aplicación
+          });    
+            
+          //Eventos de botones de la aplicación
         $('#BotonAgregar').click(function() {
           $('#ConfirmarAgregar').show();
           $('#ConfirmarModificar').hide();
@@ -213,7 +211,7 @@
         }
 
       });
-    </script>
+   </script>
 
   </body>
 </html>
