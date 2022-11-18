@@ -13,27 +13,29 @@ switch ($_GET['accion']) {
 
      case 'agregar':
             $sql = "INSERT INTO articulos(descripcion,precio) VALUES ('$_POST[descripcion]',$_POST[precio])";
-            $response = $conn->exec($sql);
+            $response = $pdo->exec($sql);
             echo json_encode($response);
             break;
 
-    // case 'borrar':
-    //     $respuesta = mysqli_query($conexion, "DELETE FROM articulos where codigo=$_GET[codigo]");
-    //     echo json_encode($respuesta);
-    //     break;
+    case 'borrar':
+         $sql = "DELETE FROM articulos where codigo=$_GET[codigo]";
+         echo json_encode($sql);
+         break;
 
-    // case 'consultar':
-    //     $datos = mysqli_query($conexion, "select codigo,descripcion,precio from articulos where codigo=$_GET[codigo]");
-    //     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
-    //     echo json_encode($resultado);
-    //     break;
+    case 'consultar':
+        $sql = "SELECT codigo,descripcion,precio FROM articulos WHERE codigo=$_GET[codigo]";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute();
+        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 
-    // case 'modificar':
-    //     $respuesta = mysqli_query($conexion, "update articulos set
-    //     descripcion='$_POST[descripcion]',
-    //     precio=$_POST[precio]
-    //     where codigo=$_GET[codigo]");
-    //     echo json_encode($respuesta);
-    //     break;
+    case 'modificar':
+         $sql = "UPDATE articulos SET
+         descripcion='$_POST[descripcion]',
+         precio=$_POST[precio]
+         WHERE codigo=$_GET[codigo]";
+         echo json_encode($sql);
+         break;
 }
 ?>
