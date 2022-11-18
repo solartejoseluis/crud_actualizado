@@ -12,17 +12,10 @@ switch ($_GET['accion']) {
         break;
 
      case 'agregar':
-        $sql = "INSERT INTO articulos(descripcion,precio) VALUES ('$_POST[descripcion]',$_POST[precio])";
-        echo json_encode($sql);
-        break;
-
-        try {
             $sql = "INSERT INTO articulos(descripcion,precio) VALUES ('$_POST[descripcion]',$_POST[precio])";
             $response = $conn->exec($sql);
             echo json_encode($response);
-            } catch(PDOException $e) {
-                echo $sql . "<br>" . $e->getMessage();
-                }
+            break;
 
     // case 'borrar':
     //     $respuesta = mysqli_query($conexion, "DELETE FROM articulos where codigo=$_GET[codigo]");

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crud Actualizado</title>
+
+    <!-- boostrap 5.2.2 css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <!-- datatables 1.12.1 css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.css"/>
+
+  </head>
+  <body>
+
+        <button type="button" class="btn btn-primary" id="BotonAgregar" data-bs-toggle="modal" data-bs-target="#FormularioArticulo" data-bs-whatever="@mdo">Formulario Nuevo</button>
+
+
+<!-- INICIA FORMULARIO NUEVO -->
+
+<div class="modal fade" id="FormularioArticulo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Formulario Agregar</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+           <input type="hidden" id="Codigo">
+
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Descripción:</label>
+            <input type="text" class="form-control"  id="Descripcion">
+          </div>
+
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Precio:</label>
+            <input type="number" class="form-control" id="Precio">
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+        <button type="button" class="btn btn-primary" id="ConfirmarAgregar">Agregar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN FORMULARIO NUEVO -->
+
+
+<script>
+
+	let registro;
+
+        function recuperarDatosFormulario() {
+          let registro = {
+            codigo: $('#Codigo').val(),
+            descripcion: $('#Descripcion').val(),
+            precio: $('#Precio').val()
+          };
+          return registro;
+        };
+
+
+        function agregarRegistro(registro) {
+          $.ajax({
+            type: 'POST',
+            url: 'datos.php?accion=agregar',
+            data: registro,
+            success: function(msg) {
+              tabla1.ajax.reload();
+            },
+            error: function() {
+              alert("Hay un problema agregando");
+            }
+          });
+        }
+
+
+
+
+</script>
+
+
+
+    <!-- jquery 3.6.1 js -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <!-- bootstrap 5.2.2 js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+    <!-- datatables 1.12.1 js -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.js"></script>
+</body>
