@@ -32,7 +32,7 @@ case 'consultar':
     break;
 
 case 'modificar':
-    $sql = "UPDATE articulos SET descripcion='$_POST[descripcion]',precio=$_POST[precio],'$_POST[tipo]' WHERE codigo=$_GET[codigo]";
+    $sql = "UPDATE articulos SET descripcion='$_POST[descripcion]',precio=$_POST[precio],tipo='$_POST[tipo]' WHERE codigo=$_GET[codigo]";
     $response = $pdo->exec($sql);
     echo json_encode($response);
     break;

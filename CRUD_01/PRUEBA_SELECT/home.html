@@ -1,0 +1,16 @@
+<div class="selector-pais">
+     Elige un país
+     <select></select>
+</div>
+
+<script type="text/javascript">
+     $(document).ready(function() {
+     $.ajax({
+          type: "POST",
+          url: "getPaises.php",
+          success: function(response){
+               $('.selector-pais select').html(response).fadeIn();
+          }
+          });
+     });
+</script>

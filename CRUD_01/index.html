@@ -74,26 +74,23 @@
             <option value="tres">Three</option>
           </select>
           <input type="hidden" class="form-control"  id="Tipo">
-                 <div class="selector-pais">
-                 Elige un país
-                 <select></select>
-                </div>
+
           <script>
-            $(document).ready(function(){
-              //cargar el array en el select
-              $.ajax({
-                type: "POST",
-                url: "getPaises.php",
-                success: function(response){
-                  $('.selector-pais select').html(response).fadeIn()
-              ;}
-            });
+            // $(document).ready(function(){
+            //   //cargar el array en el select
+            //   $.ajax({
+            //     type: "POST",
+            //     url: "getMunicipios.php",
+            //     success: function(response){
+            //       $('.selector-municipio select').html(response).fadeIn()
+            //   ;}
+            // });
 
               //tomar el valor del select y ponerlo en input
               $("#Tipo_select").change(function(){
               $('#Tipo').val($(this).val());
               });
-              });
+            //  });
           </script>
 
         </div>
@@ -179,7 +176,7 @@
       $('#Codigo').val('');
       $('#Descripcion').val('');
       $('#Precio').val('');
-      $('#Tipo').val('');
+      $('#Tipo_select').val('');
     }
 
     function recuperarDatosFormulario() {
@@ -202,7 +199,7 @@
           tabla1.ajax.reload();
         },
         error: function() {
-          alert("Hay un problema agregando");
+          alert("Cifras Mal Escritas o Datos Incompletos");
         }
       });
     }
