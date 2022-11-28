@@ -16,9 +16,9 @@
   <!-- datatables 1.12.1 js -->
   <script src="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.js"></script>
   <!-- Plugin de validacion para formularios -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
   <!-- script para desplegar select municipios -->
-  <script type="text/javascript">
+  <script>
   $(document).ready(function() {
     $.ajax({
       type: "POST",
@@ -53,24 +53,40 @@
             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" /></svg></button>
       </div>
     </div>
+
+
+
+
     <!-- INICIA FORMULARIO NUEVO -->
     <div class="modal fade" id="FormularioArticulo" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
+
+
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="">Formulario Agregar</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+
+
           <div class="modal-body">
-            <form id="formularioPrincipal">
-              <input type="hidden" class="form-control" id="Codigo">
+
+          <form id="formularioPrincipal" name="formularioPrincipal" class="requires-validation" novalidate>
+            <div class="mb-3">
+            <input type="hidden" class="form-control" id="Codigo">
+            </div>
+
               <div class="mb-3">
-                <label for="Descripcion" class="col-form-label">Descripción:</label>
-                <input type="text" class="form-control" id="Descripcion" placeholder="Digite la descripcion" required>
+                <label for="Descripcion" class="col-form-label">Descripción:<span>(descripcion requerido)</span></label>
+
+                <input type="text" class="form-control" id="Descripcion" name="Descripcion" placeholder="Digite la descripcion" required>
+                <div class="valid-feedback">Email field is valid!</div>
+                <div class="invalid-feedback">Email field cannot be blank!</div>
+
               </div>
               <div class="mb-3">
-                <label for="Precio" class="col-form-label">Precio:</label>
-                <input type="number" class="form-control" id="Precio" placeholder="digite el precio" required>
+                <label for="Precio" class="col-form-label">Precio:<span>(precio requerido)</span></label>
+                <input type="number" class="form-control" id="Precio" name="Precio" placeholder="digite el precio" required>
               </div>
               <div class="mb-3">
                 <label for="Tipo" class="col-form-label">Tipo:</label>
@@ -79,24 +95,49 @@
                   Elige un Municipio
                   <select class="form-select" id="Tipo_select" required></select>
                 </div>
-                <script>
-                  //tomar el valor del select y ponerlo en input
-              $("#Tipo_select").change(function(){
-              $('#Tipo').val($(this).val());
-              });
 
-          </script>
+
               </div>
             </form>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" id="ConfirmarAgregar">Confirmar Agregar</button>
-            <button type="button" class="btn btn-primary" id="ConfirmarModificar">Confirmar Modificar</button>
+            <button type="submit" class="btn btn-primary" id="ConfirmarAgregar">Confirmar Agregar</button>
+            <button type="submit" class="btn btn-primary" id="submit">prueba</button>
+            <button type="submit" class="btn btn-primary" id="ConfirmarModificar">Confirmar Modificar</button>
           </div>
         </div>
       </div>
     </div>
+
+                <script>
+                  //tomar el valor del select y ponerlo en input
+                  $("#Tipo_select").change(function(){
+                  $('#Tipo').val($(this).val());
+                  });
+                  // validacion del formulario
+
+                </script>
+   <!-- script para validación -->
+    <script>
+    (function() {
+        'use strict'
+        const forms = document.querySelectorAll('.requires-validation')
+        Array.from(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+    </script>
+
     <!-- FIN FORMULARIO NUEVO -->
   </div>
   <script>
@@ -126,7 +167,6 @@
           data: null
         }
       ],
-
     });
 
 
@@ -184,6 +224,7 @@
 
     // funciones para comunicarse con el servidor via ajax
     function agregarRegistro(registro) {
+      //$("#formularioPrincipal").validate();
       $.ajax({
         type: 'POST',
         url: 'datos.php?accion=agregar',

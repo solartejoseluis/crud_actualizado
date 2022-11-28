@@ -16,10 +16,7 @@
   <!-- datatables 1.12.1 js -->
   <script src="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.js"></script>
   <!-- Plugin de validacion para formularios -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
-
-  <head>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
   </head>
 
 <body>
@@ -64,38 +61,39 @@
                 <label class="btn btn-sm btn-outline-secondary" for="female">Female</label>
                 <input type="radio" class="btn-check" name="gender" id="secret" autocomplete="off" required>
                 <label class="btn btn-sm btn-outline-secondary" for="secret">Secret</label>
-                <div class="valid-feedback mv-up">You selected a gender!</div>                          <div class="invalid-feedback mv-up">Please select a gender!</div>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                <label class="form-check-label">I confirm that all data are correct</label>
-                                <div class="invalid-feedback">Please confirm that the entered data are all correct!</div>
-                            </div>
-                            <div class="form-button mt-3">
-                                <button id="submit" type="submit" class="btn btn-primary">Register</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                <div class="valid-feedback mv-up">You selected a gender!</div>
+                <div class="invalid-feedback mv-up">Please select a gender!</div>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label">I confirm that all data are correct</label>
+                <div class="invalid-feedback">Please confirm that the entered data are all correct!</div>
+              </div>
+              <div class="form-button mt-3">
+                <button id="submit" type="submit" class="btn btn-primary">Register</button>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-    <!-- script para validación -->
-    <script>
-    (function() {
-        'use strict'
-        const forms = document.querySelectorAll('.requires-validation')
-        Array.from(forms)
-            .forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
+  </div>
+  <!-- script para validación -->
+  <script>
+  (function() {
+    'use strict'
+    const forms = document.querySelectorAll('.requires-validation')
+    Array.from(forms)
+      .forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
-    </script>
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+  </script>
 </body>
