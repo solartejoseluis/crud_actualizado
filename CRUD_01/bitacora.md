@@ -31,4 +31,6 @@ para precisar mejor los datos que se insertan.
 Insertar un elemento de calendar y hacer pruebas con el manejo de las fechas en la base de datos.
 
 
+2022-11-29
+- Insertar un botón que ponga la fecha y hora actual
 

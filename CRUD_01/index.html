@@ -19,7 +19,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
   <!-- script para desplegar select municipios -->
   <script>
-  $(document).ready(function() {
+    $(document).ready(function() {
     $.ajax({
       type: "POST",
       url: "getMunicipios.php",
@@ -43,8 +43,8 @@
               <td>Descripción</td>
               <td>Precio</td>
               <td>Tipo</td>
-              <td>Modificar</td>
-              <td>Borrar</td>
+              <td></td>
+              <td></td>
             </tr>
           </thead>
         </table>
@@ -53,91 +53,51 @@
             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" /></svg></button>
       </div>
     </div>
-
-
-
-
     <!-- INICIA FORMULARIO NUEVO -->
     <div class="modal fade" id="FormularioArticulo" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
-
-
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="">Formulario Agregar</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-
-
           <div class="modal-body">
-
-          <form id="formularioPrincipal" name="formularioPrincipal" class="requires-validation" novalidate>
-            <div class="mb-3">
-            <input type="hidden" class="form-control" id="Codigo">
-            </div>
-
+            <form id="formularioPrincipal" name="formularioPrincipal" class="requires-validation" novalidate>
               <div class="mb-3">
-                <label for="Descripcion" class="col-form-label">Descripción:<span>(descripcion requerido)</span></label>
-
-                <input type="text" class="form-control" id="Descripcion" name="Descripcion" placeholder="Digite la descripcion" required>
-                <div class="valid-feedback">Email field is valid!</div>
-                <div class="invalid-feedback">Email field cannot be blank!</div>
-
+                <input type="hidden" class="form-control" id="Codigo">
               </div>
               <div class="mb-3">
-                <label for="Precio" class="col-form-label">Precio:<span>(precio requerido)</span></label>
-                <input type="number" class="form-control" id="Precio" name="Precio" placeholder="digite el precio" required>
+                <label for="Descripcion" class="col-form-label">Descripción:</label>
+                <input type="text" class="form-control" id="Descripcion" name="Descripcion" placeholder="Digite la descripcion">
+              </div>
+              <div class="mb-3">
+                <label for="Precio" class="col-form-label">Precio:</label>
+                <input type="number" class="form-control" id="Precio" name="Precio" placeholder="digite el precio">
               </div>
               <div class="mb-3">
                 <label for="Tipo" class="col-form-label">Tipo:</label>
                 <input type="hidden" class="form-control" id="Tipo">
                 <div class="selectMunicipio">
                   Elige un Municipio
-                  <select class="form-select" id="Tipo_select" required></select>
+                  <select class="form-select" id="Tipo_select"></select>
                 </div>
-
-
               </div>
             </form>
-
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary" id="ConfirmarAgregar">Confirmar Agregar</button>
-            <button type="submit" class="btn btn-primary" id="submit">prueba</button>
             <button type="submit" class="btn btn-primary" id="ConfirmarModificar">Confirmar Modificar</button>
           </div>
         </div>
       </div>
     </div>
-
-                <script>
-                  //tomar el valor del select y ponerlo en input
-                  $("#Tipo_select").change(function(){
-                  $('#Tipo').val($(this).val());
-                  });
-                  // validacion del formulario
-
-                </script>
-   <!-- script para validación -->
     <script>
-    (function() {
-        'use strict'
-        const forms = document.querySelectorAll('.requires-validation')
-        Array.from(forms)
-            .forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
+    //tomar el valor del select y ponerlo en input
+    $("#Tipo_select").change(function() {
+      $('#Tipo').val($(this).val());
+    });
     </script>
-
     <!-- FIN FORMULARIO NUEVO -->
   </div>
   <script>
@@ -169,7 +129,6 @@
       ],
     });
 
-
     //Eventos de botones de la aplicación
     $('#BotonAgregar').click(function() {
       $('#ConfirmarAgregar').show();
@@ -178,11 +137,34 @@
       $("#FormularioArticulo").modal('show');
     });
 
+
     $('#ConfirmarAgregar').click(function() {
-      $("#FormularioArticulo").modal('hide');
-      let registro = recuperarDatosFormulario();
-      agregarRegistro(registro);
+      //codigo que valida el formulario y lo agrega
+      let valida_descripcion = $('#Descripcion').val();
+      let valida_precio = $('#Precio').val();
+      let valida_tipo = $('#Tipo_select').val();
+      if (valida_descripcion.trim() == '') {
+        alert('por favor digite una descripcion.');
+        $('#Descripcion').focus();
+        return false;
+      } else if (valida_precio.trim() == '') {
+        alert(' Por favor digite un precio.');
+        $('#Precio').focus();
+        return false;
+      } else if (valida_tipo.trim() == '') {
+        alert(' Por favor elija un Tipo.');
+        $('#Tipo_select').focus();
+        return false;
+      } else {
+        //codigo que se ejecuta con todo validado
+        $("#FormularioArticulo").modal('hide');
+        let registro = recuperarDatosFormulario();
+        agregarRegistro(registro);
+        alert("todo validado");
+      }
     });
+    // fin validacion
+
 
     $('#ConfirmarModificar').click(function() {
       $("#FormularioArticulo").modal('hide');
@@ -203,13 +185,14 @@
         borrarRegistro(registro.codigo);
       }
     });
-
     // funciones que interactuan con el formulario de entrada de datos
+
     function limpiarFormulario() {
       $('#Codigo').val('');
       $('#Descripcion').val('');
       $('#Precio').val('');
       $('#Tipo_select').val('');
+      $('#Tipo').val('');
     }
 
     function recuperarDatosFormulario() {
